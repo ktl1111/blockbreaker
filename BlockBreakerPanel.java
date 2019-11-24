@@ -107,10 +107,10 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
             thread.start();
         }
         if(e.getKeyCode() == KeyEvent.VK_LEFT && paddle.x > 0){
-            paddle.x -= 15;
+            paddle.x -= 35;
         }
         if(e.getKeyCode() == KeyEvent.VK_RIGHT && paddle.x < (getWidth()-paddle.width)){
-            paddle.x += 15;
+            paddle.x += 35;
         }
 
     }
