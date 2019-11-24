@@ -5,7 +5,8 @@ import java.awt.*;
 class Block extends Rectangle {
 
     private Image pic;
-
+    int dx = 3;
+    int dy = -3;
     Block(int a, int b, int w, int h, String s) {
         x = a;
         y = b;
