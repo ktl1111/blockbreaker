@@ -54,6 +54,12 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
                 ba.dy*=-1;
             }
             ba.y += ba.dy;
+            for(Block b : blocks){
+                if(ba.intersects(b) && !b.destroyed){
+                    b.destroyed = true;
+                    ba.dy*=-1;
+                }
+            }
         }
         repaint();
     }
