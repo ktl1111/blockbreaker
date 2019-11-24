@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class BlockBreakerPanel extends JPanel implements KeyListener {
 
     private ArrayList<Block> blocks = new ArrayList<Block>();
+    private ArrayList<Block> ball = new ArrayList<Block>();
     private Block paddle;
     private Thread thread;
     private Animate animate;
@@ -27,6 +28,7 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
         for(int i = 0; i < 8; i++){
             blocks.add(new Block((i*60+2), 75,60,25, "yellow.png"));
         }
+        ball.add(new Block(237, 437, 25, 25, "ball.png"));
         addKeyListener(this);
         setFocusable(true);
     }
@@ -34,6 +36,9 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         for(Block b : blocks){
+            b.draw(g, this);
+        }
+        for(Block b : ball){
             b.draw(g, this);
         }
         paddle.draw(g, this);
