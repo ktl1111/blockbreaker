@@ -9,6 +9,7 @@ class Block extends Rectangle {
     int dy = -3;
     Rectangle left, right;
     boolean destroyed = false;
+    boolean powerup = false;
     Block(int a, int b, int w, int h, String s) {
         x = a;
         y = b;
