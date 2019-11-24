@@ -61,7 +61,7 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
             p.y+=1;
             if(p.intersects(paddle) && !p.destroyed){
                 p.destroyed = true;
-                ball.add(new Block(paddle.dx+75, 437, 25, 25, "ball.png"));
+                ball.add(new Block(paddle.x+75, 437, 25, 25, "ball.png"));
             }
         }
         for(Block ba : ball){
