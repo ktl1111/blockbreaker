@@ -17,7 +17,7 @@ class Block extends Rectangle {
         height = h;
         left = new Rectangle(a-1, b, 1, h);
         right = new Rectangle(a+w+1, b, 1, h);
-        pic = Toolkit.getDefaultToolkit().getImage(s);
+        pic = Tools.getImage(s);
     }
 
     void draw(Graphics g, Component c){

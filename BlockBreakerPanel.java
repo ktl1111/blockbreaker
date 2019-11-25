@@ -61,6 +61,7 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
             p.y+=1;
             if(p.intersects(paddle) && !p.destroyed){
                 p.destroyed = true;
+                Tools.playAudio("shootingstar.wav");
                 ball.add(new Block(paddle.x+75, 437, 25, 25, "ball.png"));
             }
         }
@@ -77,12 +78,14 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
                 if((b.left.intersects(ba)||b.right.intersects(ba)) && !b.destroyed){
                     ba.dx*=-1;
                     b.destroyed = true;
+                    Tools.playAudio("pingpong.wav");
                     if(b.powerup){
                         powerup.add(new Block(b.x, b.y, 25, 19, "extra.png"));
                     }
                 }
                 else if(ba.intersects(b) && !b.destroyed){
                     b.destroyed = true;
+                    Tools.playAudio("pingpong.wav");
                     ba.dy*=-1;
                     if(b.powerup){
                         powerup.add(new Block(b.x, b.y, 25, 19, "extra.png"));
