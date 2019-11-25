@@ -5,6 +5,8 @@ import javax.swing.*;
 public class Main {
 
     public static void main(String[] args) {
+		com.sun.javafx.application.PlatformImpl.startup(()->{}); //for Toolkit initialized
+
 	    JFrame frame = new JFrame("Block Breaker");
 
 	    BlockBreakerPanel panel = new BlockBreakerPanel();

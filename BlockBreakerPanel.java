@@ -43,12 +43,6 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
         ball.add(new Block(237, 437, 25, 25, "ball.png"));
         addKeyListener(this);
         setFocusable(true);
-        new JFXPanel();
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-            }
-        });
     }
 
     public void paintComponent(Graphics g){
