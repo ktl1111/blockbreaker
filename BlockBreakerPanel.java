@@ -18,6 +18,7 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
     private int size = 25;
     private boolean isPlayGameOverMusic = true;
     private boolean isStart = false;
+    private boolean isGameOver;
     BlockBreakerPanel(){
         paddle = new Block(175, 480, 150, 25, "paddle.png");
         for(int i = 0; i < 8; i++){
@@ -45,7 +46,7 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
     }
 
     public void paintComponent(Graphics g){
-        boolean isGameOver = true;
+        isGameOver = true;
         for(Block ba : ball){
             if(ba.y <= getHeight()){
                 isGameOver = false;
@@ -53,9 +54,13 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
         }
         if(isGameOver){
             g.drawImage(Tools.getImage("wall.jpg"),0,0,490,600,null);
-            g.setColor(Color.RED);
+            g.setColor(Color.ORANGE);
             g.setFont(new Font("Dialog", Font.BOLD, 60));
-            g.drawString("GAME OVER", 80, 250);
+            g.drawString("GAME OVER", 66, 250);
+            g.setFont(new Font("Dialog", Font.BOLD, 40));
+            g.drawString("PRESS ENTER", 100, 350);
+            g.drawString("TO RESTART", 105, 400);
+
             if(isPlayGameOverMusic){
                 Tools.playAudio("game_background.mp3");
                 isPlayGameOverMusic =false;
@@ -66,7 +71,7 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
             if(!isStart){
                 g.setColor(Color.YELLOW);
                 g.setFont(new Font("Dialog", Font.BOLD, 60));
-                g.drawString("PRESS ENTER\n", 40, 250);
+                g.drawString("PRESS ENTER", 40, 250);
                 g.setFont(new Font("Dialog", Font.BOLD, 60));
                 g.drawString("TO START", 70, 350);
             }
@@ -86,7 +91,9 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
 
     public void update(){
         for(Block p : powerup){
-            p.y+=1;
+            if(!isGameOver){
+                p.y+=1;
+            }
             if(p.intersects(paddle) && !p.destroyed){
                 p.destroyed = true;
                 Tools.playAudio("shootingstar.wav");
