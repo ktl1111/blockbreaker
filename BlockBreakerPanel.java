@@ -1,8 +1,5 @@
 package com.vany;
 
-import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -19,6 +16,7 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
     private Thread thread;
     private Animate animate;
     private int size = 25;
+    private boolean isPlayGameOverMusic = true;
     BlockBreakerPanel(){
         paddle = new Block(175, 480, 150, 25, "paddle.png");
         for(int i = 0; i < 8; i++){
@@ -46,17 +44,36 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
     }
 
     public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        for(Block b : blocks){
-            b.draw(g, this);
+        boolean isGameOver = true;
+        for(Block ba : ball){
+            if(ba.y <= getHeight()){
+                isGameOver = false;
+            }
         }
-        for(Block b : ball){
-            b.draw(g, this);
+        if(isGameOver){
+            g.drawImage(Tools.getImage("wall.jpg"),0,0,490,600,null);
+            g.setColor(Color.RED);
+            g.setFont(new Font("Dialog", Font.BOLD, 60));
+            g.drawString("GAME OVER", 88, 250);
+            if(isPlayGameOverMusic){
+                Tools.playAudio("game_background.mp3");
+                isPlayGameOverMusic =false;
+            }
+
+        } else{
+            super.paintComponent(g);
+            for(Block b : blocks){
+                b.draw(g, this);
+            }
+            for(Block b : ball){
+                b.draw(g, this);
+            }
+            for(Block p : powerup){
+                p.draw(g, this);
+            }
+            paddle.draw(g, this);
         }
-        for(Block p : powerup){
-            p.draw(g, this);
-        }
-        paddle.draw(g, this);
+
     }
 
     public void update(){

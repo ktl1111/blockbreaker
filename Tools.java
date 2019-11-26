@@ -9,14 +9,16 @@ import java.io.File;
 
 public class Tools{
 
+    private static MediaPlayer mediaPlayer;
+
     static Image getImage(String imageName) {
         return new ImageIcon("assets/images/" + imageName).getImage();
     }
 
-    static void playAudio(String fileName) {
 
+    static void playAudio(String fileName) {
         Media sound = new Media(new File("assets/audios/" + fileName).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
     }
 
