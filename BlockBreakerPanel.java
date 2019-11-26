@@ -17,6 +17,7 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
     private Animate animate;
     private int size = 25;
     private boolean isPlayGameOverMusic = true;
+    private boolean isStart = false;
     BlockBreakerPanel(){
         paddle = new Block(175, 480, 150, 25, "paddle.png");
         for(int i = 0; i < 8; i++){
@@ -54,14 +55,21 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
             g.drawImage(Tools.getImage("wall.jpg"),0,0,490,600,null);
             g.setColor(Color.RED);
             g.setFont(new Font("Dialog", Font.BOLD, 60));
-            g.drawString("GAME OVER", 88, 250);
+            g.drawString("GAME OVER", 80, 250);
             if(isPlayGameOverMusic){
                 Tools.playAudio("game_background.mp3");
                 isPlayGameOverMusic =false;
             }
-
         } else{
             super.paintComponent(g);
+            g.drawImage(Tools.getImage("wall.jpg"),0,0,490,600,null);
+            if(!isStart){
+                g.setColor(Color.YELLOW);
+                g.setFont(new Font("Dialog", Font.BOLD, 60));
+                g.drawString("PRESS ENTER\n", 40, 250);
+                g.setFont(new Font("Dialog", Font.BOLD, 60));
+                g.drawString("TO START", 70, 350);
+            }
             for(Block b : blocks){
                 b.draw(g, this);
             }
@@ -128,6 +136,7 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
             animate = new Animate(this);
             thread = new Thread(animate);
             thread.start();
+            isStart = true;
         }
         if(e.getKeyCode() == KeyEvent.VK_LEFT && paddle.x > 0){
             paddle.x -= 35;
