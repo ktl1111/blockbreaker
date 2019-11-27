@@ -89,11 +89,9 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
 
     }
 
-    public void update(){
+    public void update() throws InterruptedException {
         for(Block p : powerup){
-            if(!isGameOver){
                 p.y+=1;
-            }
             if(p.intersects(paddle) && !p.destroyed){
                 p.destroyed = true;
                 Tools.playAudio("shootingstar.wav");
@@ -109,6 +107,12 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
                 ba.dy*=-1;
             }
             ba.y += ba.dy;
+
+            if(isGameOver){
+                thread.join();
+            }
+
+
             for(Block b : blocks){
                 if((b.left.intersects(ba)||b.right.intersects(ba)) && !b.destroyed){
                     ba.dx*=-1;
@@ -130,6 +134,7 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
         }
         repaint();
     }
+
 
     @Override
     public void keyTyped(KeyEvent e) {

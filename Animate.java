@@ -10,7 +10,11 @@ public class Animate implements Runnable {
     @Override
     public void run() {
         while(true){
-            bp.update();
+            try {
+                bp.update();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
