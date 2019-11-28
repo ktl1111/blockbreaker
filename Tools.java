@@ -15,11 +15,16 @@ public class Tools{
         return new ImageIcon("assets/images/" + imageName).getImage();
     }
 
-
-    static void playAudio(String fileName) {
+    static void playAudio(String fileName){
         Media sound = new Media(new File("assets/audios/" + fileName).toURI().toString());
         mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
+    }
+
+    static MediaPlayer initGameOverAudio(String fileName){
+        Media sound = new Media(new File("assets/audios/" + fileName).toURI().toString());
+        mediaPlayer = new MediaPlayer(sound);
+        return mediaPlayer;
     }
 
 }
